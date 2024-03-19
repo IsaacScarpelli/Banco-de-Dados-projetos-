@@ -1,0 +1,61 @@
+SELECT * FROM demo;
+create table funcionario (
+idFuncionario int PRIMARY key,
+nome VARCHAR NOT NULL,
+data_nascimento DATE NOT NULL,
+dataAdmissao DATE NOT NULL,
+dataResicao DATE
+);
+
+create table cliente (
+CPF int PRIMARY key,
+nome varchar(100) not NULL,
+dataNascimento date NOT NULL,
+telefone varchar(30),
+endereco varchar(100) not NULL,
+idFuncionario int not NULL,
+FOREIGN key (idFuncionario) REFERENCES funcionario (idFuncionario)
+);
+
+alter table cliente 
+add idFuncionario int NOT NULL
+
+alter table cliente
+add CONSTRAINT FK_cliente_funcionario
+FOREIGN key (idFuncionario) REFERENCES funcionario (idFuncionario)
+
+create table produto(
+id_produto int PRIMARY key,
+nome varchar(100) not NULL,
+preco numeric (6,2) not NULL,
+especie varchar(100),
+idVenda int not NULL,
+FOREIGN key (idVenda) REFERENCES venda (idVenda)
+);
+
+
+
+INSERT into produto 
+(id_produto, nome, preco, especie)
+VALUES
+(1, 'rosa vermelha', 9.99, 'A'),
+(2, 'rosa branca', 14.99, 'B'),
+(3, 'tulipa', 79.99, 'C')
+
+create table venda (
+idVenda int PRIMARY KEy,
+dataVenda date NOT NULL,
+totalVenda numeric (7,2) not NULL,
+formaPagamento varchar(20) NOT NULL
+
+);
+
+drop table venda
+
+insert into venda
+values(1, '18/03/2024', 1234.5, 'PIX'),
+(2, '18/03/2024', 342.62, 'Cartão Débito')
+
+select idVenda as "Código Venda", dataVenda as "Data Venda", totalVenda as "Total Venda"
+from venda where totalVenda >= 100 and totalVenda <= 500
+
