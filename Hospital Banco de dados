@@ -1,0 +1,33 @@
+SELECT * FROM demo;
+CREATE TABLE medico(
+  CPF_Medico CHAR(14) PRIMARY KEY NOT NULL,
+  nome VARCHAR(60) NOT NULL,
+  idade INT NOT NULL,
+  tempTrabalho DATETIME
+);
+
+CREATE TABLE especialidade(
+  idEspecialidade INT PRIMARY KEY NOT NULL,
+  area VARCHAR(50),
+  qtdMedicos INT,
+  CPF_Medico CHAR(14),
+  FOREIGN KEY (CPF_Medico) REFERENCES medico (CPF_Medico)
+);
+
+CREATE TABLE paciente (
+  CPF_Paciente CHAR(14) PRIMARY key NOT NULL,
+  nome VARCHAR(60) NOT NULL,
+  idade INT NOT NULL,
+  senha INT NOT NULL
+);
+
+CREATE TABLE Consulta(
+  idConsulta INT PRIMARY KEY NOT NULL,
+  tipo VARCHAR(100) NOT NULL,
+  data DATETIME NOT NULL,
+  local VARCHAR(100) NOT NULL,
+  CPF_Medico CHAR(14),
+  CPF_Paciente CHAR(14),
+  FOREIGN KEY (CPF_Medico) REFERENCES medico (CPF_Medico),
+  FOREIGN KEY (CPF_Paciente) REFERENCES paciente (CPF_Paciente)
+);
